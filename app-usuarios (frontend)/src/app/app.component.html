@@ -1,0 +1,121 @@
+<!-- Cabecera -->
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a href="/" class="navbar-brand"><span class="glyphicon glyphicon-home" ></span> App-Usuarios</a>
+    </div>
+    <form class="navbar-form navbar-right" style="text-align: right">
+      <div class="form-group">
+        <input name="idSearch" class="form-control" type="number" [(ngModel)]="idSearch" placeholder="introduzca el id"> &nbsp;
+      </div>
+      <button class="btn" (click)="findById(idSearch); mostrarUsuario()"><span class="glyphicon glyphicon-search" ></span></button>
+    </form>
+  </div>
+</nav>
+<!-- <div class="form-inline" style="text-align: right">
+  <select class="form-control" >
+    <option value="id">Buscar por id</option>
+    <option value="nombre">Buscar por nombre</option>
+  </select>
+</div> -->
+<!-- Contenido -->
+<div class="contenido" >
+
+  <!-- Formulario de insercion -->
+  <div class="col-md-6" style="text-align: right">
+    <div class="panel panel-primary">
+      <div class="panel-heading" style="text-align: left">
+        <h1>Agregar datos del usuario</h1>
+      </div>
+      <div class="panel-body">
+        <form [formGroup]="formUsuario" (submit)="insertOrUpdate()">
+          <div class="form-group">
+            <input class="form-control" formControlName="username" id="username" placeholder="nombre de usuario">
+          </div>
+          <div class="form-group">
+            <input class="form-control" formControlName="password" id="password" placeholder="password">
+          </div>
+          <div class="form-group">
+            <input class="form-control" formControlName="email" id="email" placeholder="email">
+          </div>
+          <div class="form-group">
+            <input class="form-control" formControlName="fnac" id="fnac" placeholder="fecha de nacimiento">
+          </div>
+          <button class="btn btn-success" type="submit">Guardar</button> &nbsp;
+          <button class="btn btn-danger" type="reset">Cancelar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Resultado busqueda de usuario -->
+  <div class="col-md-6">
+    <div id="usuario" class="usuario">
+      <div class="panel panel-success">
+        <div class="panel-heading">
+          <h1>Usuario</h1>
+        </div>
+        <div class="panel-body">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Password</th>
+                <th>Email</th>
+                <th>Fecha de nacimiento</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="text-align:left">
+                <td>{{usuarioRes?.id}}</td>
+                <td>{{usuarioRes?.username}}</td>
+                <td>{{usuarioRes?.password}}</td>
+                <td>{{usuarioRes?.email}}</td>
+                <td>{{usuarioRes?.fnac}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lista de usuarios -->
+  <div class="col-md-12">
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        <h1>Lista de usuarios</h1>
+      </div>
+      <div class="panel-body">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Username</th>
+              <th>Password</th>
+              <th>Email</th>
+              <th>Fecha de nacimiento</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let u of usuarios" style="text-align:left">
+              <td>{{u?.id}}</td>
+              <td>{{u?.username}}</td>
+              <td>{{u?.password}}</td>
+              <td>{{u?.email}}</td>
+              <td>{{u?.fnac}}</td>
+              <td style="text-align: justify">
+                <button type="button" class="btn btn-info" (click)="onUpdate(u)"><span class="glyphicon glyphicon-pencil"></span></button>
+                &nbsp;
+                <button type="button" class="btn btn-danger" (click)="onDelete(u.id)"><span class="glyphicon glyphicon-remove"></span></button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>
